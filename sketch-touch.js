@@ -1,4 +1,4 @@
-let dim = 300;
+let dim = 50;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
