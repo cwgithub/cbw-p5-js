@@ -4,7 +4,7 @@ let sample;
 function setup() {
   createCanvas(710, 50);
   soundFormats("mp3", "ogg");
-  sample = loadSound("assets/mp3/Mixdown.mp3");
+  sample = loadSound("assets/hit-me.mp3");
 }
 
 function draw() {
