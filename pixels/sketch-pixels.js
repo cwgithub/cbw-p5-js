@@ -1,17 +1,43 @@
 function setup() {
-  createCanvas(1000, 1000);
+  const size = 10;
+
+  createCanvas(size, size);
+
+  console.log("displayDensity : " + displayDensity());
+  console.log("pixelDensity   : " + pixelDensity());
+
+  pixelDensity(displayDensity());
+  console.log("pixelDensity   : " + pixelDensity());
+  pixelDensity(1);
+  console.log("pixelDensity   : " + pixelDensity());
   background(123);
 
   strokeWeight(0);
 
   fill("red");
-  quad(0, 0, 499, 0, 499, 499, 0, 499);
-  fill("green");
-  quad(500, 0, 999, 0, 999, 499, 500, 499);
-  fill("blue");
-  quad(0, 500, 499, 500, 499, 999, 0, 999);
-  fill("white");
-  quad(500, 500, 999, 500, 999, 999, 500, 999);
+  quad(0, 0, size, 0, size, size, 0, size);
+
+  // fill("green");
+  // quad(0, size + 1, size, size + 1, size * 2, size * 2, 0, size * 2);
+
+  // fill("white");
+  // quad(size + 1, 0, size * 2, 0, size * 2, size, size + 1, size);
+
+  // fill("blue");
+  // quad(
+  //   size + 1,
+  //   size + 1,
+  //   size * 2,
+  //   size + 1,
+  //   size * 2,
+  //   size * 2,
+  //   size + 1,
+  //   size * 2
+  // );
+
+  loadPixels();
+
+  console.log(pixels);
 }
 
 function draw() {}
