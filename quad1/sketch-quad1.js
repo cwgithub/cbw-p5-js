@@ -5,22 +5,27 @@
 */
 
 let space = 150;
-let frame = 30;
+let frame = 0; // 30;
 let noiseTime = 0;
 let noiseIncrement = 10000; // 0 or 10000
 let points = [];
 let vary = 8;
 let buff = 0.2;
-let palette, r, g, b, pos;
+let palette, pos;
 
 function preload() {
   table = loadTable("colors.csv", "csv", "header");
 }
 
+function pointRandomiser(x, y) {
+  return createVector(x, y);
+  //  return  createVector(x + random(-vary, vary), y + random(-vary, vary));
+}
+
 function setup() {
-  createCanvas(610, 560);
-  background(220);
-  strokeWeight(4);
+  createCanvas(601, 601);
+  background(123);
+  strokeWeight(1);
 
   //colorMode(HSB,360,128,100,255);
   palette = floor(random(83));
@@ -31,16 +36,23 @@ function setup() {
   let extraW = round(width - wNumb * space - frame * 2);
   let extraH = round(height - hNumb * space - frame * 2);
 
-  for (y = frame + extraH; y < height - frame + 1; y += space) {
-    for (x = frame + extraW; x < width - frame; x += space) {
-      points.push(
-        createVector(x + random(-vary, vary), y + random(-vary, vary))
-      );
+  // for (y = frame + extraH; y < height - frame + 1; y += space) {
+  //   for (x = frame + extraW; x < width - frame; x += space) {
+
+  for (y = frame; y < height - frame + 1; y += space) {
+    for (x = frame; x < width - frame; x += space) {
+      const vector = pointRandomiser(x, y);
+
+      points.push(vector);
 
       if (y > space + frame + extraH && x > space + frame + extraW) {
         pos = points.length - 1;
-        strokeWeight(1);
-        fill(240);
+        strokeWeight(0);
+
+        let rgb = generateColor();
+
+        fill(rgb);
+
         quad(
           points[pos].x,
           points[pos].y,
@@ -52,15 +64,19 @@ function setup() {
           points[pos - wNumb].y
         );
 
-        getColor();
+        // const { red, green, blue } = getColor();
 
-        floodFill(
-          createVector(
-            round(points[pos].x - space / 2),
-            round(points[pos].y - space / 2)
-          ),
-          [r, g, b, 255]
-        );
+        const middleX = floor(points[pos].x - space / 2);
+        const middleY = floor(points[pos].y - space / 2);
+
+        const pxIndex = 4 * (width * middleY) + middleX;
+        console.log("pxIndex: " + pxIndex);
+
+        floodFillOrig(createVector(middleX, middleY), rgb);
+
+        strokeWeight(1);
+        fill([255, 0, 0]);
+        ellipse(middleX, middleY, 10, 10);
 
         // noFill();
         // strokeWeight(3);
@@ -117,7 +133,11 @@ function setup() {
   }
 }
 
-function getColor() {
+function generateColor() {
+  // const r = 255;
+  // const g = 255;
+  // const b = 0;
+
   let col = floor(random(5));
 
   huey = table.get(palette, col * 3);
@@ -127,7 +147,14 @@ function getColor() {
   const k = (n) => (n + huey / 60) % 6;
   const f = (n) =>
     (brt / 100) * (1 - (sat / 128) * Math.max(0, Math.min(k(n), 4 - k(n), 1)));
-  r = 255 * f(5);
-  g = 255 * f(3);
-  b = 255 * f(1);
+
+  // const r = 255 * f(5);
+  // const g = 255 * f(3);
+  // const b = 255 * f(1);
+
+  const r = 255;
+  const g = 255;
+  const b = 255;
+
+  return [r, g, b];
 }

@@ -19,7 +19,7 @@ function floodFill(seed, fillColor) {
     pixels[index + 2],
     pixels[index + 3],
   ]; //check what is the current color where the seed is pointing
-  if (arrayEquals(fillColor, oldColor)) {
+  if (arrayEqualsOrig(fillColor, oldColor)) {
     done = true;
     return;
   }
@@ -41,7 +41,7 @@ function floodFill(seed, fillColor) {
       pixels[index + 2],
       pixels[index + 3],
     ]; //getting the color from the canvas for this array item
-    if (!arrayEquals(thisPixColor, oldColor)) {
+    if (!arrayEqualsOrig(thisPixColor, oldColor)) {
       continue;
     } //don't do below function if the colors are the same
 
@@ -51,7 +51,7 @@ function floodFill(seed, fillColor) {
     pixels[index + 2] = fillColor[0 + 2] * n1;
     pixels[index + 3] = fillColor[0 + 3];
     //fill current pixel with variations of fill color
-    queue = expandToNeighbours(queue, current);
+    queue = expandToNeighboursOrig(queue, current);
   } //replacing the queue array with new array from the called function
   updatePixels();
   done = true;
@@ -59,7 +59,7 @@ function floodFill(seed, fillColor) {
   noiseTime += noiseIncrement;
 }
 
-function arrayEquals(a, b) {
+function arrayEqualsOrig(a, b) {
   return (
     Array.isArray(a) &&
     Array.isArray(b) &&
@@ -73,7 +73,7 @@ function arrayEquals(a, b) {
 // Lines 39-41 don't do much.  Array.isArray() returns whether the passed value is an array or not
 // .every tests whether all elements in the array pass the test implemented by the provided function, but no idea how val,index is a test; index is current pixel; no idea what val is or what this is doing
 
-function expandToNeighbours(queue, current) {
+function expandToNeighboursOrig(queue, current) {
   x3 = current.x;
   y3 = current.y;
   // if within window boundaries, add new vectors to array above, below, and to sides of current position;
