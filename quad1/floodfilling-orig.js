@@ -30,7 +30,7 @@ function expandToNeighboursOrig(queue, current) {
   return queue;
 }
 
-function floodFillOrig(seedPoint, rgb) {
+function floodFillOrig(seedPoint, fillColor) {
   loadPixels();
 
   const pxIndex = 4 * (width * seedPoint.y) + seedPoint.x;
@@ -47,26 +47,26 @@ function floodFillOrig(seedPoint, rgb) {
   let queue = [];
   queue.push(seedPoint);
 
-  //   while (queue.length) {
-  //     let current = queue.shift();
-  //     index = 4 * (width * current.y + current.x);
-  //     let color = [
-  //       pixels[index],
-  //       pixels[index + 1],
-  //       pixels[index + 2],
-  //       pixels[index + 3],
-  //     ];
+  while (queue.length) {
+    let current = queue.shift();
+    index = 4 * (width * current.y + current.x);
+    let color = [
+      pixels[index],
+      pixels[index + 1],
+      pixels[index + 2],
+      pixels[index + 3],
+    ];
 
-  //     if (!arrayEqualsOrig(color, seedColor)) {
-  //       continue;
-  //     }
+    if (!arrayEqualsOrig(color, seedColor)) {
+      continue;
+    }
 
-  //     for (let i = 0; i < 4; i++) {
-  //       pixels[index + i] = fillColor[0 + i];
-  //     }
+    for (let i = 0; i < 4; i++) {
+      pixels[index + i] = fillColor[0 + i];
+    }
 
-  //     queue = expandToNeighboursOrig(queue, current);
-  //   }
+    queue = expandToNeighboursOrig(queue, current);
+  }
 
   updatePixels();
 }

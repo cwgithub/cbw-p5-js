@@ -27,6 +27,15 @@ function setup() {
   background(123);
   strokeWeight(1);
 
+  console.log("displayDensity : " + displayDensity());
+  console.log("pixelDensity   : " + pixelDensity());
+
+  pixelDensity(displayDensity());
+  console.log("pixelDensity   : " + pixelDensity());
+  pixelDensity(1);
+  console.log("pixelDensity   : " + pixelDensity());
+  background(123);
+
   //colorMode(HSB,360,128,100,255);
   palette = floor(random(83));
 
@@ -47,11 +56,13 @@ function setup() {
 
       if (y > space + frame + extraH && x > space + frame + extraW) {
         pos = points.length - 1;
-        strokeWeight(0);
+        strokeWeight(1);
 
         let rgb = generateColor();
 
-        fill(rgb);
+        // fill(rgb);
+
+        fill([200, 200, 200]);
 
         quad(
           points[pos].x,
@@ -148,13 +159,13 @@ function generateColor() {
   const f = (n) =>
     (brt / 100) * (1 - (sat / 128) * Math.max(0, Math.min(k(n), 4 - k(n), 1)));
 
-  // const r = 255 * f(5);
-  // const g = 255 * f(3);
-  // const b = 255 * f(1);
+  const r = 255 * f(5);
+  const g = 255 * f(3);
+  const b = 255 * f(1);
 
-  const r = 255;
-  const g = 255;
-  const b = 255;
+  // const r = 255;
+  // const g = 0;
+  // const b = 0;
 
   return [r, g, b];
 }
