@@ -83,7 +83,7 @@ function setup() {
         const pxIndex = 4 * (width * middleY) + middleX;
         console.log("pxIndex: " + pxIndex);
 
-        floodFillOrig(createVector(middleX, middleY), rgb);
+        floodFillOrig(createVector(middleX, middleY), "green");
 
         strokeWeight(1);
         fill([255, 0, 0]);

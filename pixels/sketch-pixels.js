@@ -13,10 +13,10 @@ function drawShape(x, y, size) {
   );
 }
 
-function setup() {
-  // pixelDensity(1);
+function test1() {
+  pixelDensity(1);
 
-  const size = 1;
+  const size = 50;
 
   createCanvas(size * 3, size * 3);
   background(123);
@@ -38,47 +38,30 @@ function setup() {
 
   const ph = new PixelHelper(pixels, width, height, pixelDensity());
 
-  console.log(ph.getPixel(0, 0));
-
-  // console.log("Background");
-  // console.log(ph.getPixel(size * 2, 0));
-  // console.log(ph.getPixel(size * 2, size * 2));
-  // console.log(ph.getPixel(0, size * 2));
-
-  // console.log("Green");
-  // console.log(ph.getPixel(0, 0));
-  // console.log(ph.getPixel(size - 1, size - 1));
-
-  // console.log("Red");
-  // console.log(ph.getPixel(size, 0));
-  // console.log(ph.getPixel(size * 2 - 1, size - 1));
-
-  // console.log("White");
-  // console.log(ph.getPixel(size, size));
-  // console.log(ph.getPixel(size * 2 - 1, size * 2 - 1));
-
-  // console.log("Blue");
-  // console.log(ph.getPixel(0, size));
-  // console.log(ph.getPixel(size - 1, size * 2 - 1));
-
-  // for (let y = 0; y < height; y++) {
-  //   const offset = y * width * 4;
-  //   console.log("----- offset = " + offset);
-  //   for (let x = 0; x < width; x++) {
-  //     let pix = offset + x * 4;
-  //     console.log(pix + " = " + 0);
-  //     pixels[pix] = 0;
-  //     pix = offset + x * 4 + 1;
-  //     console.log(pix + " = " + 255);
-  //     pixels[pix] = 255;
-  //     pix = offset + x * 4 + 2;
-  //     console.log(pix + " = " + 0);
-  //     pixels[pix] = 0;
-  //     pix = offset + x * 4 + 3;
-  //     console.log(pix + " = " + 255);
-  //     pixels[pix] = 255;
-  //   }
-  // }
+  console.log(ph.getPixel(1, 0));
 
   updatePixels();
+
+  fill([123, 123, 123, 255]);
+  drawShape(500, 500, size);
+}
+
+function test2() {
+  pixelDensity(1);
+
+  const size = 100;
+
+  createCanvas(size * 2, size * 2);
+  background("pink");
+
+  fill([123, 123, 123, 255]);
+  drawShape(50, 50, size);
+
+  // floodFill(createVector(100, 100), [255, 255, 0, 255]);
+  floodFillNoiseCBW(createVector(100, 100), [255, 255, 0, 255]);
+}
+
+function setup() {
+  // test1();
+  test2();
 }

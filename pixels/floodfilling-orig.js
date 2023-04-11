@@ -49,34 +49,27 @@ function floodFill(seed, fillColor) {
   let queue = [];
   queue.push(seed);
 
-  // while (queue.length) {
-  //   let current = queue.shift();
+  while (queue.length) {
+    let current = queue.shift();
 
-  //   index = 4 * (width * current.y + current.x);
+    index = 4 * (width * current.y + current.x);
 
-  //   let color = [
-  //     pixels[index],
-  //     pixels[index + 1],
-  //     pixels[index + 2],
-  //     pixels[index + 3],
-  //   ];
+    let color = [
+      pixels[index],
+      pixels[index + 1],
+      pixels[index + 2],
+      pixels[index + 3],
+    ];
 
-  //   if (!arrayEquals(color, seedColor)) {
-  //     continue;
-  //   }
+    if (!arrayEquals(color, seedColor)) {
+      continue;
+    }
 
-  //   for (let i = 0; i < 4; i++) {
-  //     pixels[index + i] = fillColor[0 + i];
-  //   }
+    for (let i = 0; i < 4; i++) {
+      pixels[index + i] = fillColor[0 + i];
+    }
 
-  //   // queue = expandToNeighbours(queue, current);
-  // }
-
-  for (let i = 0; i < 200; i += 4) {
-    pixels[index + i] = 0;
-    pixels[index + i + 1] = 255;
-    pixels[index + i + 2] = 0;
-    pixels[index + i + 3] = 255;
+    queue = expandToNeighbours(queue, current);
   }
 
   updatePixels();

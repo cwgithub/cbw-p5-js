@@ -1,10 +1,3 @@
-/*By Steve's Makerspace
-  Video: https://youtu.be/nqHeasOCwfU
-  Refresh your browser if it gets hung up too long.
-Color palettes collected from coolers.co
-Floodfill algorithm by czartacus
-*/
-
 let doubleFill = true; //suggest making the canvas smaller for doubleFill - it takes a while
 let frame = 20;
 let noiseTime = 0;
@@ -18,11 +11,15 @@ function preload() {
 }
 
 function setup() {
+  pixelDensity(1);
+
   createCanvas(windowWidth - 20, windowHeight - 50);
+
   space = random(50, 100); //grid size
   buff0 = random(5, 10); //randomness of quad shape: higher # = more uniform
   buff1 = random(0.1, 0.33); //inner quad boundry
   inner = floor(random(2)); //0 = no inner quad; 1 = inner quad created
+
   let saveButton = createButton("save jpg");
   saveButton.position(10, height + 10);
   saveButton.mousePressed(saveArt);
@@ -53,8 +50,11 @@ function setup() {
       // start quads after first row done
       if (x > wFrame + space - 1 && y > hFrame + space - 1) {
         pos = points.length - 1;
+
         fill(150);
+
         strokeWeight(1);
+
         quad(
           points[pos].x,
           points[pos].y,
@@ -65,14 +65,17 @@ function setup() {
           points[pos - wNumb].x,
           points[pos - wNumb].y
         );
-        // getRGBcolor();
-        // firstCol = [r, g, b];
-        // floodFill(createVector(round(x - space / 2), round(y - space / 2)), [
-        //   r,
-        //   g,
-        //   b,
-        //   255,
-        // ]);
+
+        getRGBcolor();
+
+        firstCol = [r, g, b];
+
+        floodFillNoiseCBW(
+          createVector(round(x - space / 2), round(y - space / 2)),
+          [r, g, b, 255, noiseTime],
+          noiseIncrement
+        );
+
         // noiseTime += noiseIncrement;
         // if (inner == 1) {
         //   // make inner quad
