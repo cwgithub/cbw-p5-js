@@ -76,68 +76,64 @@ function setup() {
           noiseIncrement
         );
 
-        // noiseTime += noiseIncrement;
-        // if (inner == 1) {
-        //   // make inner quad
-        //   fill(150);
-        //   strokeWeight(1);
-        //   quad(
-        //     points[pos].x - space * buff1,
-        //     points[pos].y - space * buff1,
-        //     points[pos - 1].x + space * buff1,
-        //     points[pos - 1].y - space * buff1,
-        //     points[pos - wNumb - 1].x + space * buff1,
-        //     points[pos - wNumb - 1].y + space * buff1,
-        //     points[pos - wNumb].x - space * buff1,
-        //     points[pos - wNumb].y + space * buff1
-        //   );
-        //   getRGBcolor();
-        //   secCol = [r, g, b];
-        //   //make 1 attempt to get an inner color different from the outer quad color
-        //   if (firstCol == secCol) {
-        //     getRGBcolor();
-        //   }
-        //   floodFill(createVector(round(x - space / 2), round(y - space / 2)), [
-        //     r,
-        //     g,
-        //     b,
-        //     255,
-        //   ]);
-        // }
-        // if (doubleFill == true) {
-        //   getRGBcolor();
-        //   floodFill(createVector(round(x - space / 2), round(y - space / 2)), [
-        //     r,
-        //     g,
-        //     b,
-        //     255,
-        //   ]);
-        // }
-        // // redo quads with larger lines to cover floodfill imperfections
-        // noFill();
-        // strokeWeight(3);
-        // quad(
-        //   points[pos].x,
-        //   points[pos].y,
-        //   points[pos - 1].x,
-        //   points[pos - 1].y,
-        //   points[pos - wNumb - 1].x,
-        //   points[pos - wNumb - 1].y,
-        //   points[pos - wNumb].x,
-        //   points[pos - wNumb].y
-        // );
-        // if (inner == 1) {
-        //   quad(
-        //     points[pos].x - space * buff1,
-        //     points[pos].y - space * buff1,
-        //     points[pos - 1].x + space * buff1,
-        //     points[pos - 1].y - space * buff1,
-        //     points[pos - wNumb - 1].x + space * buff1,
-        //     points[pos - wNumb - 1].y + space * buff1,
-        //     points[pos - wNumb].x - space * buff1,
-        //     points[pos - wNumb].y + space * buff1
-        //   );
-        // }
+        noiseTime += noiseIncrement;
+        if (inner == 1) {
+          // make inner quad
+          fill(150);
+          strokeWeight(1);
+          quad(
+            points[pos].x - space * buff1,
+            points[pos].y - space * buff1,
+            points[pos - 1].x + space * buff1,
+            points[pos - 1].y - space * buff1,
+            points[pos - wNumb - 1].x + space * buff1,
+            points[pos - wNumb - 1].y + space * buff1,
+            points[pos - wNumb].x - space * buff1,
+            points[pos - wNumb].y + space * buff1
+          );
+          getRGBcolor();
+          secCol = [r, g, b];
+          //make 1 attempt to get an inner color different from the outer quad color
+          if (firstCol == secCol) {
+            getRGBcolor();
+          }
+          floodFillNoiseCBW(
+            createVector(round(x - space / 2), round(y - space / 2)),
+            [r, g, b, 255]
+          );
+        }
+        if (doubleFill == true) {
+          getRGBcolor();
+          floodFillNoiseCBW(
+            createVector(round(x - space / 2), round(y - space / 2)),
+            [r, g, b, 255]
+          );
+        }
+        // redo quads with larger lines to cover floodfill imperfections
+        noFill();
+        strokeWeight(3);
+        quad(
+          points[pos].x,
+          points[pos].y,
+          points[pos - 1].x,
+          points[pos - 1].y,
+          points[pos - wNumb - 1].x,
+          points[pos - wNumb - 1].y,
+          points[pos - wNumb].x,
+          points[pos - wNumb].y
+        );
+        if (inner == 1) {
+          quad(
+            points[pos].x - space * buff1,
+            points[pos].y - space * buff1,
+            points[pos - 1].x + space * buff1,
+            points[pos - 1].y - space * buff1,
+            points[pos - wNumb - 1].x + space * buff1,
+            points[pos - wNumb - 1].y + space * buff1,
+            points[pos - wNumb].x - space * buff1,
+            points[pos - wNumb].y + space * buff1
+          );
+        }
       }
     }
   }
